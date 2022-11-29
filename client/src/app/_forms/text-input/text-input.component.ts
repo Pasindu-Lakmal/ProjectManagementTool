@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Self } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { ControlValueAccessor, UntypedFormControl, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-text-input',
@@ -19,7 +19,7 @@ export class TextInputComponent implements ControlValueAccessor {
   registerOnTouched(fn: any): void {}
 
   //casting
-  get control(): FormControl {
-    return this.ngControl.control as FormControl;
+  get control(): UntypedFormControl {
+    return this.ngControl.control as UntypedFormControl;
   }
 }

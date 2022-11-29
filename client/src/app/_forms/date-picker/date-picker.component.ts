@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Self } from '@angular/core';
 import {
   ControlContainer,
   ControlValueAccessor,
-  FormControl,
+  UntypedFormControl,
   NgControl,
 } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -30,8 +30,8 @@ export class DatePickerComponent implements ControlValueAccessor {
   registerOnTouched(fn: any): void {}
 
   //to use word control in templete (there can be type error ) without this
-  get control(): FormControl {
-    return this.ngControl.control as FormControl;
+  get control(): UntypedFormControl {
+    return this.ngControl.control as UntypedFormControl;
   }
 
   ngOnInit(): void {}

@@ -8,7 +8,7 @@ namespace API.DTOs
         [Required] public String Gender { get; set; }
         
         [Required] public String KnownAs{ get; set; }
-        [Required] public DateTime? DateOfBirth { get; set; } //optional to make required work
+        [Required] public DateOnly? DateOfBirth { get; set; } //optional to make required work
         [Required] public String City { get; set; }
         [Required] public String Country { get; set; }
 

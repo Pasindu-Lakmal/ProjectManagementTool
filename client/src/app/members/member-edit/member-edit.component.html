@@ -26,18 +26,18 @@
         </div>
         <div>
           <strong>Last Active:</strong>
-          <p>{{ member.lastActive }}</p>
+          <p>{{ member.lastActive + "Z" | timeago }}</p>
         </div>
         <div>
           <strong>Member since:</strong>
-          <p>{{ member.created }}</p>
+          <p>{{ member.created | date: "dd MMM yyyy" }}</p>
         </div>
       </div>
       <div class="card-footer">
         <button
           form="editForm"
           [disabled]="!editForm.dirty"
-          class="btn btn-success btn-block"
+          class="btn btn-success col-12"
         >
           Save Changes
         </button>
@@ -73,7 +73,7 @@
             rows="6"
           ></textarea>
           <h4 class="mt-2">Location Details</h4>
-          <div class="form-inline">
+          <div class="d-flex">
             <label for="city">City:</label>
             <input
               [(ngModel)]="member.city"
