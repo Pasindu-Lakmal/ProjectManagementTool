@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221130045307_addproject")]
-    partial class addproject
+    [Migration("20221130071908_addProject")]
+    partial class addProject
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,29 +95,34 @@ namespace API.Data.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("API.Entities.Project", b =>
+            modelBuilder.Entity("API.Entities.Tasks", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TasksId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AppUserId")
+                    b.Property<int?>("AssigneeId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProjectDescription")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ProjectId")
+                    b.Property<int>("Description")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ProjectName")
+                    b.Property<DateTime>("DueDate")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.Property<int>("WorkId")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("AppUserId");
+                    b.Property<string>("status")
+                        .HasColumnType("TEXT");
 
-                    b.ToTable("Project");
+                    b.HasKey("TasksId");
+
+                    b.HasIndex("AssigneeId");
+
+                    b.HasIndex("WorkId");
+
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -135,6 +140,28 @@ namespace API.Data.Migrations
                     b.ToTable("Likes");
                 });
 
+            modelBuilder.Entity("API.Entities.Work", b =>
+                {
+                    b.Property<int>("WorkId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("WorkDescription")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("WorkName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("WorkId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Works");
+                });
+
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "AppUser")
@@ -146,15 +173,21 @@ namespace API.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("API.Entities.Project", b =>
+            modelBuilder.Entity("API.Entities.Tasks", b =>
                 {
-                    b.HasOne("API.Entities.AppUser", "AppUser")
-                        .WithMany("Projects")
-                        .HasForeignKey("AppUserId")
+                    b.HasOne("API.Entities.AppUser", "Assignee")
+                        .WithMany("Tasks")
+                        .HasForeignKey("AssigneeId");
+
+                    b.HasOne("API.Entities.Work", "Works")
+                        .WithMany("Tasks")
+                        .HasForeignKey("WorkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("Assignee");
+
+                    b.Navigation("Works");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -176,6 +209,17 @@ namespace API.Data.Migrations
                     b.Navigation("TargetUser");
                 });
 
+            modelBuilder.Entity("API.Entities.Work", b =>
+                {
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("Works")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.Navigation("LikedByUsers");
@@ -184,7 +228,14 @@ namespace API.Data.Migrations
 
                     b.Navigation("Photos");
 
-                    b.Navigation("Projects");
+                    b.Navigation("Tasks");
+
+                    b.Navigation("Works");
+                });
+
+            modelBuilder.Entity("API.Entities.Work", b =>
+                {
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

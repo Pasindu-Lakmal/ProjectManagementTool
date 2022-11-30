@@ -10,9 +10,9 @@ namespace API.Entities
         public DateTime DueDate { get; set; }
         public string status { get; set; }
 
-        public Project Projects { get; set; }
+        public Work Works { get; set; }
 
-        public int ProjectId { get; set; }
+        public int WorkId { get; set; }
 
         public AppUser Assignee { get; set; }
     }
