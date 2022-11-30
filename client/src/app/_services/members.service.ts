@@ -142,4 +142,8 @@ export class MembersService {
 
     return params;
   }
+
+  getMembersForSelect() {
+    return this.http.get<Member[]>(this.baseUrl + 'users/name');
+  }
 }

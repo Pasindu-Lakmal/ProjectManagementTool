@@ -151,5 +151,15 @@ namespace API.Controllers
             return  BadRequest("Faild to delete photo");
         }
 
+        [HttpGet("name")]
+
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsersName()
+        {
+          
+            var users = await _userRepository.GetUsersNameAsync();
+            var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);
+            return  Ok(usersToReturn);
+        }
+
     }
 }

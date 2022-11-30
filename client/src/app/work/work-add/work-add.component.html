@@ -1,1 +1,53 @@
-<p>work-add works!</p>
+<form
+  [formGroup]="registerForm"
+  (ngSubmit)="registerForm.valid && register()"
+  autocomplete="off"
+>
+  <h2 class="text-center text-primary">Add Project</h2>
+  <hr />
+  <app-text-input
+    [formControl]="$any(registerForm.controls['title'])"
+    [label]="'title'"
+  ></app-text-input>
+  <app-text-input
+    [formControl]="$any(registerForm.controls['knownAs'])"
+    [label]="'Discription'"
+  ></app-text-input>
+
+  <!--dropDown -->
+  <div class="d-flex px-2">
+    <label class="col-form-lable me-2">Show: </label>
+    <select class="form-select ms-1" style="width: 130px" name="gender">
+      <option class="form-options" *ngFor="let member of members">
+        {{ member.username }}
+      </option>
+    </select>
+  </div>
+
+  <div class="row" *ngIf="validationErrors">
+    <ul class="text-danger">
+      <li *ngFor="let error of validationErrors">
+        {{ error }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="text-center">
+    <button
+      [disabled]="!registerForm.valid"
+      class="btn btn-success me-2"
+      type="submit"
+    >
+      Register
+    </button>
+    <button class="btn btn-danger me-2" (click)="cancel()" type="button">
+      Cancel
+    </button>
+  </div>
+</form>
+
+<!-- json output to chech form status -->
+
+<!-- <p>Form value: {{ registerForm.value | json }}</p>
+<p>Form value: {{ registerForm.status | json }}</p>
+<p>Form validity: {{ registerForm.valid | json }}</p> -->
