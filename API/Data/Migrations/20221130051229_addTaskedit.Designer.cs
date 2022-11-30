@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221130051229_addTaskedit")]
+    partial class addTaskedit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
@@ -120,7 +123,10 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AssigneeId")
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Assignee")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Description")
@@ -137,7 +143,7 @@ namespace API.Data.Migrations
 
                     b.HasKey("TasksId");
 
-                    b.HasIndex("AssigneeId");
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("ProjectId");
 
@@ -183,9 +189,9 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Tasks", b =>
                 {
-                    b.HasOne("API.Entities.AppUser", "Assignee")
+                    b.HasOne("API.Entities.AppUser", "AppUser")
                         .WithMany("Tasks")
-                        .HasForeignKey("AssigneeId");
+                        .HasForeignKey("AppUserId");
 
                     b.HasOne("API.Entities.Project", "Projects")
                         .WithMany("Tasks")
@@ -193,7 +199,7 @@ namespace API.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Assignee");
+                    b.Navigation("AppUser");
 
                     b.Navigation("Projects");
                 });

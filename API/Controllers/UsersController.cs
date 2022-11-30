@@ -153,11 +153,11 @@ namespace API.Controllers
 
         [HttpGet("name")]
 
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsersName()
+        public async Task<ActionResult<IEnumerable<NameDto>>> GetUsersName()
         {
           
             var users = await _userRepository.GetUsersNameAsync();
-            var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);
+            var usersToReturn = _mapper.Map<IEnumerable<NameDto>>(users);
             return  Ok(usersToReturn);
         }
 

@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221130045600_addprojectedit")]
+    partial class addprojectedit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
@@ -114,36 +117,6 @@ namespace API.Data.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("API.Entities.Tasks", b =>
-                {
-                    b.Property<int>("TasksId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AssigneeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Description")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("status")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("TasksId");
-
-                    b.HasIndex("AssigneeId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("Tasks");
-                });
-
             modelBuilder.Entity("API.Entities.UserLike", b =>
                 {
                     b.Property<int>("SourceUserId")
@@ -181,23 +154,6 @@ namespace API.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("API.Entities.Tasks", b =>
-                {
-                    b.HasOne("API.Entities.AppUser", "Assignee")
-                        .WithMany("Tasks")
-                        .HasForeignKey("AssigneeId");
-
-                    b.HasOne("API.Entities.Project", "Projects")
-                        .WithMany("Tasks")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Assignee");
-
-                    b.Navigation("Projects");
-                });
-
             modelBuilder.Entity("API.Entities.UserLike", b =>
                 {
                     b.HasOne("API.Entities.AppUser", "SourceUser")
@@ -226,13 +182,6 @@ namespace API.Data.Migrations
                     b.Navigation("Photos");
 
                     b.Navigation("Projects");
-
-                    b.Navigation("Tasks");
-                });
-
-            modelBuilder.Entity("API.Entities.Project", b =>
-                {
-                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }
