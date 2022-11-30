@@ -22,7 +22,7 @@ namespace API.Entities
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Work> Works { get; set; }
-        public ICollection<Tasks> Tasks { get; set; }
+        public ICollection<Todo> Todos { get; set; }
         public List<UserLike>  LikedByUsers { get; set; }
         public List<UserLike>  LikedUsers { get; set; }
 

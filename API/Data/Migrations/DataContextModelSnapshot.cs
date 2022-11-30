@@ -92,13 +92,13 @@ namespace API.Data.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("API.Entities.Tasks", b =>
+            modelBuilder.Entity("API.Entities.Todo", b =>
                 {
-                    b.Property<int>("TasksId")
+                    b.Property<int>("TodoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AssigneeId")
+                    b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Description")
@@ -113,13 +113,13 @@ namespace API.Data.Migrations
                     b.Property<string>("status")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("TasksId");
+                    b.HasKey("TodoId");
 
-                    b.HasIndex("AssigneeId");
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("WorkId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Todos");
                 });
 
             modelBuilder.Entity("API.Entities.UserLike", b =>
@@ -170,19 +170,21 @@ namespace API.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("API.Entities.Tasks", b =>
+            modelBuilder.Entity("API.Entities.Todo", b =>
                 {
-                    b.HasOne("API.Entities.AppUser", "Assignee")
-                        .WithMany("Tasks")
-                        .HasForeignKey("AssigneeId");
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("Todos")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.Entities.Work", "Works")
-                        .WithMany("Tasks")
+                        .WithMany("Todos")
                         .HasForeignKey("WorkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Assignee");
+                    b.Navigation("AppUser");
 
                     b.Navigation("Works");
                 });
@@ -225,14 +227,14 @@ namespace API.Data.Migrations
 
                     b.Navigation("Photos");
 
-                    b.Navigation("Tasks");
+                    b.Navigation("Todos");
 
                     b.Navigation("Works");
                 });
 
             modelBuilder.Entity("API.Entities.Work", b =>
                 {
-                    b.Navigation("Tasks");
+                    b.Navigation("Todos");
                 });
 #pragma warning restore 612, 618
         }

@@ -32,5 +32,8 @@ namespace API.Data
                 .HasForeignKey(s => s.TargetUserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
+
+        public DbSet<Work> Works { get; set; }
+        public DbSet<Todo> Todos { get; set; }
     }
 }

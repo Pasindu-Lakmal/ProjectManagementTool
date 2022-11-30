@@ -82,6 +82,56 @@ namespace API.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Works",
+                columns: table => new
+                {
+                    WorkId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    WorkName = table.Column<string>(type: "TEXT", nullable: true),
+                    WorkDescription = table.Column<string>(type: "TEXT", nullable: true),
+                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Works", x => x.WorkId);
+                    table.ForeignKey(
+                        name: "FK_Works_Users_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Todos",
+                columns: table => new
+                {
+                    TodoId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Description = table.Column<int>(type: "INTEGER", nullable: false),
+                    DueDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    status = table.Column<string>(type: "TEXT", nullable: true),
+                    WorkId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Todos", x => x.TodoId);
+                    table.ForeignKey(
+                        name: "FK_Todos_Users_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Todos_Works_WorkId",
+                        column: x => x.WorkId,
+                        principalTable: "Works",
+                        principalColumn: "WorkId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Likes_TargetUserId",
                 table: "Likes",
@@ -90,6 +140,21 @@ namespace API.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Photos_AppUserId",
                 table: "Photos",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Todos_AppUserId",
+                table: "Todos",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Todos_WorkId",
+                table: "Todos",
+                column: "WorkId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Works_AppUserId",
+                table: "Works",
                 column: "AppUserId");
         }
 
@@ -101,6 +166,12 @@ namespace API.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Photos");
+
+            migrationBuilder.DropTable(
+                name: "Todos");
+
+            migrationBuilder.DropTable(
+                name: "Works");
 
             migrationBuilder.DropTable(
                 name: "Users");
