@@ -26,6 +26,15 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
+import { TaskCardComponent } from './task/task-card/task-card.component';
+import { TaskListComponent } from './task/task-list/task-list.component';
+import { TaskEditComponent } from './task/task-edit/task-edit.component';
+import { TaskDetailsComponent } from './task/task-details/task-details.component';
+import { TaskCreateComponent } from './task/task-create/task-create.component';
+import { WorkCardComponent } from './work/work-card/work-card.component';
+import { WorkListComponent } from './work/work-list/work-list.component';
+import { WorkEditComponent } from './work/work-edit/work-edit.component';
+import { WorkAddComponent } from './work/work-add/work-add.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +54,15 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
     PhotoEditorComponent,
     TextInputComponent,
     DatePickerComponent,
+    TaskCardComponent,
+    TaskListComponent,
+    TaskEditComponent,
+    TaskDetailsComponent,
+    TaskCreateComponent,
+    WorkCardComponent,
+    WorkListComponent,
+    WorkEditComponent,
+    WorkAddComponent,
   ],
   imports: [
     BrowserModule,

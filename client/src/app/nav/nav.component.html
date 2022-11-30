@@ -1,11 +1,16 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
     <a class="navbar-brand" routerLink="/" routerLinkActive="active"
-      >Dating App</a
-    >
+      >Dashboard
+    </a>
 
     <ul class="navbar-nav me-auto">
       <ng-container *ngIf="accountService.currentUser$ | async">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/project" routerLinkActive="active"
+            >Project</a
+          >
+        </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/members" routerLinkActive="active"
             >Matches</a
@@ -30,6 +35,7 @@
     </ul>
 
     <!-- dropdown menu -->
+
     <div
       class="dropdown"
       *ngIf="accountService.currentUser$ | async as user"

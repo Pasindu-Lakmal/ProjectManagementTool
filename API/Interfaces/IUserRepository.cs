@@ -17,6 +17,5 @@ namespace API.Interfaces
         Task<MemberDto> GetMemberAsync(string username);
         
 
-
     }
 }

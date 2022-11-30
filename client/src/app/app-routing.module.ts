@@ -9,6 +9,11 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
+import { TaskEditComponent } from './task/task-edit/task-edit.component';
+import { TaskListComponent } from './task/task-list/task-list.component';
+import { WorkAddComponent } from './work/work-add/work-add.component';
+import { WorkEditComponent } from './work/work-edit/work-edit.component';
+import { WorkListComponent } from './work/work-list/work-list.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
@@ -28,6 +33,13 @@ const routes: Routes = [
       },
       { path: 'list', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
+
+      { path: 'project', component: WorkListComponent },
+      { path: 'project/edit', component: WorkEditComponent },
+      { path: 'project/add', component: WorkAddComponent },
+
+      { path: 'task/list', component: TaskListComponent },
+      { path: 'task/edit', component: TaskEditComponent },
     ],
   },
 
