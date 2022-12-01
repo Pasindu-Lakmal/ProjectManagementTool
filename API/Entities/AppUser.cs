@@ -21,7 +21,7 @@ namespace API.Entities
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
-        public ICollection<Work> Works { get; set; }
+        public List<Work> Works { get; set; } 
         public ICollection<Todo> Todos { get; set; }
         public List<UserLike>  LikedByUsers { get; set; }
         public List<UserLike>  LikedUsers { get; set; }

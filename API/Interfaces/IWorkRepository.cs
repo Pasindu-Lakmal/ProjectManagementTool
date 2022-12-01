@@ -1,7 +1,15 @@
+using API.DTOs;
+using API.Entities;
+
 namespace API.Interfaces
 {
     public interface IWorkRepository
     {
-        Task<ImageUploadResult> AddPhotoAsync(IFormFile file);
+        void AddWork (Work work);
+
+        void DeleteWork (Work work);
+
+        Task<Work> GetWork(int id);
+        Task<Work> GetWorks();
     }
 }

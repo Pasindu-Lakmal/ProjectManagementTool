@@ -1,54 +1,73 @@
+
+
+
+using API.Data;
 using API.DTOs;
 using API.Extensions;
-using API.Helpers;
 using API.Interfaces;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class WorkController:BaseApiController
+    public class WorkController: BaseApiController
     {
         private readonly IUserRepository _userRepository;
-    
-        private readonly IMapper _mapper;
-        public WorkController(IUserRepository userRepository,  IMapper mapper)
+        // private readonly IWorkRepository _workRepository,IWorkRepository workRepository,;
+        private readonly DataContext _context;
+        public WorkController(IUserRepository userRepository,DataContext context)
         {
-            _mapper = mapper;
+            _context = context;
+            // _workRepository = workRepository;
             _userRepository = userRepository;
-            
+             
         }
-
-       [HttpPost("add-photo")]
-        public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
+        
+        
+        [HttpPost]
+        public async Task<ActionResult>AddWork(WorkDto work)
         {
-            var user = await _userRepository.GetUserbyUsernameAsync(User.GetUsername());
-            var result = await _photoService.AddPhotoAsync(file);
-            if(result.Error != null) return BadRequest(result.Error.Message);
-            var photo = new Photo
+            var sourceUserId = User.GetUserId();
+            var user = await _userRepository.GetUserbyUsernameAsyncA(User.GetUsername());
+
+            // return Ok(user.UserName);
+            var newWork = new Entities.Work
             {
-                Url =result.SecureUrl.AbsoluteUri,
-                PublicId = result.PublicId
+                AppUser =user,
+                WorkName = work.WorkName,
+                WorkDescription = work.WorkDescription, 
             };
-
-            if(user.Photos.Count == 0)
-            {
-                photo.IsMain = true;
-            }
-
-            user.Photos.Add(photo);
-
-            if(await _userRepository.SaveAllAsync())
-            {
-                // return _mapper.Map<PhotoDto>(photo);
-                //return 201 ok we user createAtRoute method
-                return CreatedAtRoute("GetUser",new{username = user.UserName},_mapper.Map<PhotoDto>(photo) );
-            }
-                
-            
-            return BadRequest("Problem adding photo");
-
+        
+            _context.Works.Add(newWork);
+            if(await _userRepository.SaveAllAsync()) return Ok("added");
+            return BadRequest("Failed to add work");
         }
+
+
+
+
+
+
+
+        // [HttpPost]
+        // public async Task<ActionResult>AddWork(WorkDto work)
+        // {
+        //     var sourceUserId = User.GetUserId();
+        //     var user = await _userRepository.GetUserbyUsernameAsyncA(User.GetUsername());
+
+            
+        //     var newWork = new Entities.Work
+        //     {
+        //         AppUser = user,
+        //         WorkName = work.WorkName,
+        //         WorkDescription = work.WorkDescription,
+        //     };
+           
+        //     user.Works.Add(newWork);
+        //     if(await _userRepository.SaveAllAsync()) return Ok();
+        //     return BadRequest("Failed to add work");
+        // }
+
+
 
     }
 }
