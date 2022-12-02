@@ -1,5 +1,6 @@
 export interface Work {
   workId: number;
-  WorkName: string;
+  workName: string;
   workDescription: string;
+  createrName: string;
 }

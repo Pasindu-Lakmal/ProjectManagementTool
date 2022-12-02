@@ -3,3 +3,8 @@
     <span class="fa fa-solid fa-plus me-2"></span>Add Project
   </button>
 </div>
+
+<div *ngFor="let work of works">
+  {{ work.workName }}
+  <app-work-card [works]="work"></app-work-card>
+</div>

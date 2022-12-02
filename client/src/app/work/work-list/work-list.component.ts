@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs';
 import { Work } from 'src/app/_models/work';
 import { WorkService } from 'src/app/_services/work.service';
 
@@ -8,7 +9,7 @@ import { WorkService } from 'src/app/_services/work.service';
   styleUrls: ['./work-list.component.css'],
 })
 export class WorkListComponent implements OnInit {
-  work: Work[] = [];
+  works: Work[] = [];
   constructor(private workService: WorkService) {}
 
   ngOnInit(): void {
@@ -18,8 +19,9 @@ export class WorkListComponent implements OnInit {
   loadWork() {
     this.workService.getWorks().subscribe({
       next: (response) => {
-        this.work = response;
-        console.log(this.work);
+        this.works = response;
+        console.log(this.works);
+        console.log(this.works[1].workId);
       },
     });
   }
