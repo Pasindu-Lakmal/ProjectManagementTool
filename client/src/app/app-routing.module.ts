@@ -9,6 +9,7 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
+import { TaskCreateComponent } from './task/task-create/task-create.component';
 import { TaskEditComponent } from './task/task-edit/task-edit.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { WorkAddComponent } from './work/work-add/work-add.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
 
       { path: 'task/list', component: TaskListComponent },
       { path: 'task/edit', component: TaskEditComponent },
+      { path: 'task/create', component: TaskCreateComponent },
     ],
   },
 

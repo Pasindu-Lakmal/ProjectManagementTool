@@ -40,7 +40,6 @@ export class WorkAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.load();
     console.log(this.members);
     this.initializeForm();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
@@ -49,75 +48,21 @@ export class WorkAddComponent implements OnInit {
   initializeForm() {
     //remove new formcontroler using form builder
     this.registerForm = this.fb.group({
-      title: ['', Validators.required],
-      knownAs: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-      password: [
+      title: [
         '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
+        [Validators.required, Validators.maxLength(5)],
+        Validators.maxLength(15),
       ],
-      confirmPassword: [
+      discription: [
         '',
-        [Validators.required, this.matchValues('password')],
+        [
+          Validators.required,
+          Validators.minLength(15),
+          Validators.maxLength(400),
+        ],
       ],
     });
-    this.registerForm.controls.password.valueChanges.subscribe({
-      next: () => {
-        this.registerForm.controls['confirmPassword'].updateValueAndValidity();
-      },
-    });
   }
 
-  //match confirm passwor with password
-  matchValues(matchTo: string): ValidatorFn {
-    return (control: AbstractControl) => {
-      return control?.value === control?.parent?.controls[matchTo].value
-        ? null
-        : { notMatching: true };
-    };
-  }
-
-  register() {
-    //modify dateOfBirth
-    const dob = this.getDateOnly(
-      this.registerForm.controls['dateOfBirth'].value
-    );
-    const values = { ...this.registerForm.value, dateOfBirth: dob };
-
-    //register method
-    this.accountService.register(values).subscribe({
-      next: (responce) => {
-        console.log(responce);
-        this.router.navigateByUrl('/members');
-      },
-      error: (error) => {
-        this.validationErrors = error;
-      },
-    });
-  }
-
-  cancel() {
-    this.cancelRegister.emit(false);
-  }
-
-  private getDateOnly(dob: string | undefined) {
-    if (!dob) return;
-    let theDob = new Date(dob);
-    return new Date(
-      theDob.setMinutes(theDob.getMinutes() - theDob.getTimezoneOffset())
-    )
-      .toISOString()
-      .slice(0, 10);
-  }
-
-  load() {
-    this.memberService.getMembersForSelect().subscribe({
-      next: (response) => {
-        this.members = response;
-        console.log(this.members);
-      },
-    });
-  }
+  register() {}
 }

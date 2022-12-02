@@ -35,6 +35,7 @@ import { WorkCardComponent } from './work/work-card/work-card.component';
 import { WorkListComponent } from './work/work-list/work-list.component';
 import { WorkEditComponent } from './work/work-edit/work-edit.component';
 import { WorkAddComponent } from './work/work-add/work-add.component';
+import { TextareaInputComponent } from './_forms/textarea-input/textarea-input.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { WorkAddComponent } from './work/work-add/work-add.component';
     WorkListComponent,
     WorkEditComponent,
     WorkAddComponent,
+    TextareaInputComponent,
   ],
   imports: [
     BrowserModule,
