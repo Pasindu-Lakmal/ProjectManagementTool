@@ -1,6 +1,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
@@ -9,9 +10,9 @@ namespace API.Data
         private readonly DataContext _context;
         public WorkRepository(DataContext context)
         {
-            _context = context;
-            
+            _context = context;     
         }
+
         public void AddWork(Work work)
         {
             _context.Works.Add(work);
@@ -19,17 +20,23 @@ namespace API.Data
 
         public void DeleteWork(Work work)
         {
-            throw new NotImplementedException();
+            _context.Works.Remove(work);
         }
 
-        public Task<Work> GetWork(int id)
+        public async Task<IEnumerable<Work>> GetWorks()
         {
-            throw new NotImplementedException();
+           return await _context.Works.ToListAsync();
         }
 
-        public Task<Work> GetWorks()
+        public async Task<bool> SaveAllAsync()
         {
-            throw new NotImplementedException();
+             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<Work> GetWorkByIdAsync(int id)
+        {
+            return await _context.Works.FindAsync(id);
+        }
+
     }
 }

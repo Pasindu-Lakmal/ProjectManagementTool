@@ -5,11 +5,14 @@ namespace API.Interfaces
 {
     public interface IWorkRepository
     {
-        void AddWork (Work work);
+        void AddWork (Work Work);
 
         void DeleteWork (Work work);
 
-        Task<Work> GetWork(int id);
-        Task<Work> GetWorks();
+        Task<IEnumerable<Work>> GetWorks();
+        
+        Task<bool> SaveAllAsync();
+
+        Task<Work> GetWorkByIdAsync(int id);
     }
 }

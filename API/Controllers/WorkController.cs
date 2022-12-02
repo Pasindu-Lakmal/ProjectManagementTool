@@ -1,10 +1,9 @@
-
-
-
 using API.Data;
 using API.DTOs;
+using API.Entities;
 using API.Extensions;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -12,60 +11,59 @@ namespace API.Controllers
     public class WorkController: BaseApiController
     {
         private readonly IUserRepository _userRepository;
-        // private readonly IWorkRepository _workRepository,IWorkRepository workRepository,;
-        private readonly DataContext _context;
-        public WorkController(IUserRepository userRepository,DataContext context)
+        private readonly IWorkRepository _workRepository;
+        private readonly IMapper _mapper;
+        public WorkController(IUserRepository userRepository,IWorkRepository workRepository, IMapper mapper)
         {
-            _context = context;
-            // _workRepository = workRepository;
+            _mapper = mapper;
+            _workRepository = workRepository;
             _userRepository = userRepository;
              
         }
-        
-        
+
         [HttpPost]
         public async Task<ActionResult>AddWork(WorkDto work)
         {
             var sourceUserId = User.GetUserId();
             var user = await _userRepository.GetUserbyUsernameAsyncA(User.GetUsername());
 
-            // return Ok(user.UserName);
-            var newWork = new Entities.Work
+            
+            var newWork = new Work
             {
-                AppUser =user,
+                AppUser = user,
                 WorkName = work.WorkName,
-                WorkDescription = work.WorkDescription, 
+                WorkDescription = work.WorkDescription,
             };
-        
-            _context.Works.Add(newWork);
-            if(await _userRepository.SaveAllAsync()) return Ok("added");
+           
+            _workRepository.AddWork(newWork);
+            if(await _workRepository.SaveAllAsync()) return Ok();
             return BadRequest("Failed to add work");
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<WorkDto>>> GetUsersName()
+        {
+          
+            var works = await _workRepository.GetWorks();
+            var usersToReturn = _mapper.Map<IEnumerable<WorkDto>>(works);
+            return  Ok(usersToReturn);
+        }
 
+        [HttpDelete("delete/{workId}")]
 
-
-
-
-
-        // [HttpPost]
-        // public async Task<ActionResult>AddWork(WorkDto work)
-        // {
-        //     var sourceUserId = User.GetUserId();
-        //     var user = await _userRepository.GetUserbyUsernameAsyncA(User.GetUsername());
-
+        public async Task<ActionResult> DeleteWork(int workId)
+        {
+            var  work = await _workRepository.GetWorkByIdAsync(workId);
             
-        //     var newWork = new Entities.Work
-        //     {
-        //         AppUser = user,
-        //         WorkName = work.WorkName,
-        //         WorkDescription = work.WorkDescription,
-        //     };
-           
-        //     user.Works.Add(newWork);
-        //     if(await _userRepository.SaveAllAsync()) return Ok();
-        //     return BadRequest("Failed to add work");
-        // }
+            if(work == null) return BadRequest("Work not Found");
+            
+            _workRepository.DeleteWork(work);
+            
+            if(await _workRepository.SaveAllAsync()) return Ok();
+            return BadRequest("Delete Fail");
+
+        }
+
 
 
 
