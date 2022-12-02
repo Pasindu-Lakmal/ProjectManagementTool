@@ -19,4 +19,7 @@ export class WorkService {
   addWork(model: any) {
     return this.http.post(this.baseUrl + 'work', model);
   }
+  deleteWork(workId: number) {
+    return this.http.delete(this.baseUrl + 'work/delete/' + workId, {});
+  }
 }

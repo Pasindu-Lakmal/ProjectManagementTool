@@ -4,7 +4,12 @@
     <p class="card-text">{{ works.workDescription }}</p>
 
     <button routerLink="/task/list" class="btn btn-info">Go To Project</button>
-    <button type="button" class="btn btn-danger btn-s mx-2">
+    <button
+      type="button"
+      class="btn btn-danger btn-s mx-2"
+      routerLink="/project"
+      (click)="deleteWork(works.workId)"
+    >
       <span class="fa fa-trash"></span>
     </button>
     <button

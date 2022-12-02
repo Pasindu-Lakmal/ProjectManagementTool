@@ -1,22 +1,26 @@
 <form
-  [formGroup]="registerForm"
-  (ngSubmit)="registerForm.valid && register()"
+  [formGroup]="addWork"
+  (ngSubmit)="addWork.valid && addWorks()"
   autocomplete="off"
 >
   <h2 class="text-center text-primary">Add Project</h2>
   <hr />
   <app-text-input
-    [formControl]="$any(registerForm.controls['title'])"
+    [formControl]="$any(addWork.controls['workName'])"
     [label]="'title'"
   ></app-text-input>
-  <app-textarea-input
-    [formControl]="$any(registerForm.controls['discription'])"
+  <app-text-input
+    [formControl]="$any(addWork.controls['workDescription'])"
+    [label]="'discription'"
+  ></app-text-input>
+  <!-- <app-textarea-input
+    [formControl]="$any(addWork.controls['discription'])"
     [label]="'Discription'"
   >
-  </app-textarea-input>
+  </app-textarea-input> -->
   <div class="text-center">
     <button
-      [disabled]="!registerForm.valid"
+      [disabled]="!addWork.valid"
       class="btn btn-success me-2"
       type="submit"
     >
@@ -30,6 +34,6 @@
 
 <!-- json output to chech form status -->
 
-<!-- <p>Form value: {{ registerForm.value | json }}</p>
-<p>Form value: {{ registerForm.status | json }}</p>
-<p>Form validity: {{ registerForm.valid | json }}</p> -->
+<p>Form value: {{ addWork.value | json }}</p>
+<p>Form value: {{ addWork.status | json }}</p>
+<p>Form validity: {{ addWork.valid | json }}</p>

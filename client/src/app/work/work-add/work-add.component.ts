@@ -16,6 +16,7 @@ import { User } from 'src/app/_models/user';
 import { UserParams } from 'src/app/_models/userParams';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
+import { WorkService } from 'src/app/_services/work.service';
 
 @Component({
   selector: 'app-work-add',
@@ -24,7 +25,7 @@ import { MembersService } from 'src/app/_services/members.service';
 })
 export class WorkAddComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
-  registerForm: FormGroup;
+  addWork: FormGroup;
   maxDate: Date = new Date();
   validationErrors: string[] | undefined;
   user: string[] | undefined;
@@ -32,8 +33,7 @@ export class WorkAddComponent implements OnInit {
   members: Member[] = [];
 
   constructor(
-    private accountService: AccountService,
-    private memberService: MembersService,
+    private workService: WorkService,
     private toastr: ToastrService,
     private fb: FormBuilder,
     private router: Router
@@ -47,13 +47,16 @@ export class WorkAddComponent implements OnInit {
 
   initializeForm() {
     //remove new formcontroler using form builder
-    this.registerForm = this.fb.group({
-      title: [
+    this.addWork = this.fb.group({
+      workName: [
         '',
-        [Validators.required, Validators.maxLength(5)],
-        Validators.maxLength(15),
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(20),
+        ],
       ],
-      discription: [
+      workDescription: [
         '',
         [
           Validators.required,
@@ -63,6 +66,15 @@ export class WorkAddComponent implements OnInit {
       ],
     });
   }
-
-  register() {}
+  addWorks() {
+    this.workService.addWork(this.addWork.value).subscribe({
+      next: (responce) => {
+        console.log(responce);
+        this.router.navigateByUrl('/project');
+      },
+      error: (error) => {
+        this.validationErrors = error;
+      },
+    });
+  }
 }
