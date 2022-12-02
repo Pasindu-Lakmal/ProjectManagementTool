@@ -30,6 +30,7 @@ namespace API.Controllers
             
             var newWork = new Work
             {
+                CreaterName = user.UserName,
                 AppUser = user,
                 WorkName = work.WorkName,
                 WorkDescription = work.WorkDescription,
@@ -41,11 +42,11 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<WorkDto>>> GetUsersName()
+        public async Task<ActionResult<IEnumerable<WorkDetailsDto>>> GetUsersName()
         {
           
             var works = await _workRepository.GetWorks();
-            var usersToReturn = _mapper.Map<IEnumerable<WorkDto>>(works);
+            var usersToReturn = _mapper.Map<IEnumerable<WorkDetailsDto>>(works);
             return  Ok(usersToReturn);
         }
 

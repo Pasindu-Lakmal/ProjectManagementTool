@@ -90,6 +90,7 @@ namespace API.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     WorkName = table.Column<string>(type: "TEXT", nullable: true),
                     WorkDescription = table.Column<string>(type: "TEXT", nullable: true),
+                    CreaterName = table.Column<string>(type: "TEXT", nullable: true),
                     AppUserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

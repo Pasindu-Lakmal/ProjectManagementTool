@@ -146,6 +146,9 @@ namespace API.Data.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("CreaterName")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("WorkDescription")
                         .HasColumnType("TEXT");
 
