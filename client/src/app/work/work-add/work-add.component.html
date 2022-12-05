@@ -9,15 +9,12 @@
     [formControl]="$any(addWork.controls['workName'])"
     [label]="'title'"
   ></app-text-input>
-  <!-- <app-text-input
-    [formControl]="$any(addWork.controls['workDescription'])"
-    [label]="'discription'"
-  ></app-text-input> -->
   <app-textarea-input
     [formControl]="$any(addWork.controls['workDescription'])"
     [label]="'discription'"
   >
   </app-textarea-input>
+
   <div class="text-center">
     <button
       [disabled]="!addWork.valid"

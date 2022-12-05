@@ -5,6 +5,7 @@ using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace API.Controllers
 {
@@ -69,11 +70,11 @@ namespace API.Controllers
         }
        
        [HttpGet("workName/{workId}")]
-       public async Task<ActionResult<IEnumerable<TodoDto>>> GetWorkNameByWorkId(int workId)
+       public async Task<ActionResult> GetWorkNameByWorkId(int workId)
        {
 
             var work = await _workRepository.GetWorkByIdAsync(workId);
-            return Ok(work.WorkName);
+            return Ok(JsonConvert.SerializeObject(work.WorkName));
        }
 
         

@@ -9,9 +9,8 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/_models/member';
-import { UserParams } from 'src/app/_models/userParams';
-import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
+import { TodoService } from 'src/app/_services/todo.service';
 
 @Component({
   selector: 'app-task-create',
@@ -20,15 +19,15 @@ import { MembersService } from 'src/app/_services/members.service';
 })
 export class TaskCreateComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
-  registerForm: FormGroup;
-  maxDate: Date = new Date();
+  addTodo: FormGroup;
+  minDate: Date = new Date();
   validationErrors: string[] | undefined;
   user: string[] | undefined;
-  userParams: UserParams | undefined;
   members: Member[] = [];
   workId: number;
+
   constructor(
-    private accountService: AccountService,
+    private todoService: TodoService,
     private memberService: MembersService,
     private toastr: ToastrService,
     private fb: FormBuilder,
@@ -38,77 +37,54 @@ export class TaskCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
-    console.log(this.members);
-    this.initializeForm();
-    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
     this.workId = Number(this.route.snapshot.paramMap.get('workId'));
     console.log(this.workId);
+    this.minDate.setFullYear(this.minDate.getFullYear());
+    this.minDate.setMonth(this.minDate.getMonth());
+    this.minDate.setDate(this.minDate.getDate());
+    this.initializeForm();
   }
 
   initializeForm() {
-    //remove new formcontroler using form builder
-    this.registerForm = this.fb.group({
-      title: ['', Validators.required],
-      knownAs: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-      password: [
+    this.addTodo = this.fb.group({
+      title: [
         '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(20),
+        ],
       ],
-      confirmPassword: [
+      description: [
         '',
-        [Validators.required, this.matchValues('password')],
+        [
+          Validators.required,
+          Validators.minLength(15),
+          Validators.maxLength(400),
+        ],
       ],
-    });
-    this.registerForm.controls.password.valueChanges.subscribe({
-      next: () => {
-        this.registerForm.controls['confirmPassword'].updateValueAndValidity();
-      },
+      dueDate: ['', [Validators.required]],
+      assigneeName: ['', [Validators.required]],
     });
   }
 
-  //match confirm passwor with password
-  matchValues(matchTo: string): ValidatorFn {
-    return (control: AbstractControl) => {
-      return control?.value === control?.parent?.controls[matchTo].value
-        ? null
-        : { notMatching: true };
+  addTodos() {
+    const dueDate = this.getDateOnly(this.addTodo.controls['dueDate'].value);
+    const values = {
+      ...this.addTodo.value,
+      dueDate: dueDate,
+      workId: this.workId,
     };
-  }
 
-  register() {
-    //modify dateOfBirth
-    const dob = this.getDateOnly(
-      this.registerForm.controls['dateOfBirth'].value
-    );
-    const values = { ...this.registerForm.value, dateOfBirth: dob };
-
-    //register method
-    this.accountService.register(values).subscribe({
+    this.todoService.addTodo(values).subscribe({
       next: (responce) => {
         console.log(responce);
-        this.router.navigateByUrl('/members');
+        this.router.navigateByUrl(`/task/list/${this.workId}`);
       },
       error: (error) => {
         this.validationErrors = error;
       },
     });
-  }
-
-  cancel() {
-    this.cancelRegister.emit(false);
-  }
-
-  private getDateOnly(dob: string | undefined) {
-    if (!dob) return;
-    let theDob = new Date(dob);
-    return new Date(
-      theDob.setMinutes(theDob.getMinutes() - theDob.getTimezoneOffset())
-    )
-      .toISOString()
-      .slice(0, 10);
   }
 
   load() {
@@ -118,5 +94,17 @@ export class TaskCreateComponent implements OnInit {
         console.log(this.members);
       },
     });
+  }
+
+  private getDateOnly(dueDate: string | undefined) {
+    if (!dueDate) return;
+    let theDueDate = new Date(dueDate);
+    return new Date(
+      theDueDate.setMinutes(
+        theDueDate.getMinutes() - theDueDate.getTimezoneOffset()
+      )
+    )
+      .toISOString()
+      .slice(0, 10);
   }
 }

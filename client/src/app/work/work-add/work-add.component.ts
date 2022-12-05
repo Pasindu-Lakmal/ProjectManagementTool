@@ -24,7 +24,6 @@ import { WorkService } from 'src/app/_services/work.service';
   styleUrls: ['./work-add.component.css'],
 })
 export class WorkAddComponent implements OnInit {
-  @Output() cancelRegister = new EventEmitter();
   addWork: FormGroup;
   maxDate: Date = new Date();
   validationErrors: string[] | undefined;

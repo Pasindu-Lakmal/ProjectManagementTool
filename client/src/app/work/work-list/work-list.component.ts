@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
 import { Work } from 'src/app/_models/work';
 import { WorkService } from 'src/app/_services/work.service';
 

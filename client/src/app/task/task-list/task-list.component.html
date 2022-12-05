@@ -1,3 +1,6 @@
+<div class="d-flex justify-content-center">
+  <h1>{{ workName | titlecase }}</h1>
+</div>
 <div class="d-flex mb-3">
   <button
     routerLink="/task/create/{{ workId }}"
@@ -7,28 +10,7 @@
   </button>
 </div>
 <div class="row">
-  <div class="col-3">
-    <app-task-card></app-task-card>
-  </div>
-  <div class="col-3">
-    <app-task-card></app-task-card>
-  </div>
-  <div class="col-3">
-    <app-task-card></app-task-card>
-  </div>
-  <div class="col-3">
-    <app-task-card></app-task-card>
-  </div>
-  <div class="col-3">
-    <app-task-card></app-task-card>
-  </div>
-  <div class="col-3">
-    <app-task-card></app-task-card>
-  </div>
-  <div class="col-3">
-    <app-task-card></app-task-card>
-  </div>
-  <div class="col-3">
-    <app-task-card></app-task-card>
+  <div class="col-3" *ngFor="let todo of todos">
+    <app-task-card [todo]="todo"></app-task-card>
   </div>
 </div>

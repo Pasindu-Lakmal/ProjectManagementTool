@@ -1,23 +1,37 @@
 <form
-  [formGroup]="registerForm"
-  (ngSubmit)="registerForm.valid && register()"
+  [formGroup]="addTodo"
   autocomplete="off"
+  (ngSubmit)="addTodo.valid && addTodos()"
 >
-  <h2 class="text-center text-primary">Add Project</h2>
+  <h2 class="text-center text-primary">Add Todo</h2>
   <hr />
+
   <app-text-input
-    [formControl]="$any(registerForm.controls['title'])"
+    [formControl]="$any(addTodo.controls['title'])"
     [label]="'title'"
   ></app-text-input>
-  <app-text-input
-    [formControl]="$any(registerForm.controls['knownAs'])"
-    [label]="'Discription'"
-  ></app-text-input>
 
-  <!--dropDown -->
+  <app-textarea-input
+    [formControl]="$any(addTodo.controls['description'])"
+    [label]="'discription'"
+  >
+  </app-textarea-input>
+
+  <app-date-picker
+    [formControl]="$any(addTodo.controls['dueDate'])"
+    [label]="'Due Date'"
+    [minDate]="minDate"
+  ></app-date-picker>
+
+  <!-- drop down -->
   <div class="d-flex px-2">
-    <label class="col-form-lable me-2">Show: </label>
-    <select class="form-select ms-1" style="width: 130px" name="gender">
+    <label class="col-form-lable me-2">Assign to: </label>
+    <select
+      class="form-select ms-1"
+      style="width: 130px"
+      name="gender"
+      [formControl]="$any(addTodo.controls['assigneeName'])"
+    >
       <option class="form-options" *ngFor="let member of members">
         {{ member.username }}
       </option>
@@ -34,13 +48,17 @@
 
   <div class="text-center">
     <button
-      [disabled]="!registerForm.valid"
+      [disabled]="!addTodo.valid"
       class="btn btn-success me-2"
       type="submit"
     >
       Register
     </button>
-    <button class="btn btn-danger me-2" (click)="cancel()" type="button">
+    <button
+      class="btn btn-danger me-2"
+      routerLink="/task/list/{{ workId }}"
+      type="button"
+    >
       Cancel
     </button>
   </div>
@@ -48,6 +66,6 @@
 
 <!-- json output to chech form status -->
 
-<!-- <p>Form value: {{ registerForm.value | json }}</p>
-<p>Form value: {{ registerForm.status | json }}</p>
-<p>Form validity: {{ registerForm.valid | json }}</p> -->
+<p>Form value: {{ addTodo.value | json }}</p>
+<p>Form value: {{ addTodo.status | json }}</p>
+<p>Form validity: {{ addTodo.valid | json }}</p>

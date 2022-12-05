@@ -13,15 +13,12 @@ export class WorkCardComponent implements OnInit {
 
   constructor(private workService: WorkService, private router: Router) {}
 
-  ngOnInit(): void {
-    console.log(this.works);
-  }
+  ngOnInit(): void {}
 
   deleteWork(workId: number) {
     console.log('delete click');
     this.workService.deleteWork(workId).subscribe({
       next: (responce) => {
-        console.log(responce);
         location.reload();
       },
       error: (error) => {
