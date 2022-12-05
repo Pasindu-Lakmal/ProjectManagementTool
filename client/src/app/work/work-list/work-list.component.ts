@@ -19,6 +19,7 @@ export class WorkListComponent implements OnInit {
     this.workService.getWorks().subscribe({
       next: (response) => {
         this.works = response;
+        console.log(this.works);
       },
     });
   }

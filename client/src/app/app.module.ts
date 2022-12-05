@@ -36,6 +36,8 @@ import { WorkListComponent } from './work/work-list/work-list.component';
 import { WorkEditComponent } from './work/work-edit/work-edit.component';
 import { WorkAddComponent } from './work/work-add/work-add.component';
 import { TextareaInputComponent } from './_forms/textarea-input/textarea-input.component';
+import { TaskMyListComponent } from './task/task-my-list/task-my-list.component';
+import { TaskMyCardComponent } from './task/task-my-card/task-my-card.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { TextareaInputComponent } from './_forms/textarea-input/textarea-input.c
     WorkEditComponent,
     WorkAddComponent,
     TextareaInputComponent,
+    TaskMyListComponent,
+    TaskMyCardComponent,
   ],
   imports: [
     BrowserModule,

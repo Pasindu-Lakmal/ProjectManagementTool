@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Work } from 'src/app/_models/work';
+import { AccountService } from 'src/app/_services/account.service';
 import { WorkService } from 'src/app/_services/work.service';
 
 @Component({
@@ -10,10 +11,18 @@ import { WorkService } from 'src/app/_services/work.service';
 })
 export class WorkCardComponent implements OnInit {
   @Input() works: Work | undefined;
+  currentUserName: string;
 
-  constructor(private workService: WorkService, private router: Router) {}
+  constructor(
+    private workService: WorkService,
+    private router: Router,
+    private accountService: AccountService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCurrentUser();
+    console.log(this.currentUserName);
+  }
 
   deleteWork(workId: number) {
     console.log('delete click');
@@ -23,6 +32,14 @@ export class WorkCardComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
+      },
+    });
+  }
+
+  getCurrentUser() {
+    this.accountService.currentUser$.subscribe({
+      next: (res) => {
+        this.currentUserName = res.username;
       },
     });
   }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Todo } from 'src/app/_models/todo';
+import { AccountService } from 'src/app/_services/account.service';
 import { TodoService } from 'src/app/_services/todo.service';
 
 @Component({
@@ -10,9 +10,15 @@ import { TodoService } from 'src/app/_services/todo.service';
 })
 export class TaskCardComponent implements OnInit {
   @Input() todo: Todo | undefined;
-  constructor(private todoService: TodoService, private router: Router) {}
+  currentUserName: string;
+  constructor(
+    private todoService: TodoService,
+    private accountService: AccountService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCurrentUser();
+  }
 
   deleteTodo(todoId: number) {
     console.log('delete click');
@@ -22,6 +28,14 @@ export class TaskCardComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
+      },
+    });
+  }
+
+  getCurrentUser() {
+    this.accountService.currentUser$.subscribe({
+      next: (res) => {
+        this.currentUserName = res.username;
       },
     });
   }
