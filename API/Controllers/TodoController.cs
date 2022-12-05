@@ -93,10 +93,21 @@ namespace API.Controllers
         }
 
         
-        [HttpGet("assignee/{assigneeId}")]
+        [HttpGet("assigneeId/{assigneeId}")]
          public async Task<ActionResult<IEnumerable<TodoDto>>> GetTodosByAssigneeId(int assigneeId)
         {
             var todos = await _todoRepository.GetTodoByAssigneeIdAsync(assigneeId);
+            
+            var todosToReturn = _mapper.Map<IEnumerable<TodoDto>>(todos);
+            // return Ok(todos);
+            return  Ok(todosToReturn);
+        }
+        
+        
+        [HttpGet("assigneeName/{assigneename}")]
+         public async Task<ActionResult<IEnumerable<TodoDto>>> GetTodosByAssigneeName(string assigneename)
+        {
+            var todos = await _todoRepository.GetTodoByAssigneeName(assigneename);
             
             var todosToReturn = _mapper.Map<IEnumerable<TodoDto>>(todos);
             // return Ok(todos);

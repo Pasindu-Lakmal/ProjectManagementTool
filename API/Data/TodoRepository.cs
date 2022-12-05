@@ -53,5 +53,13 @@ namespace API.Data
         {
             return await _context.Todos.Where(r => r.AppUserId == assigneeId).Include(e =>e.Works).ToListAsync();
         }
+
+        
+
+        public async Task<IEnumerable<Todo>> GetTodoByAssigneeName(string assigneeName)
+        {
+            return await _context.Todos.Where(r => r.AssigneeName == assigneeName).Include(e =>e.Works).ToListAsync();
+
+        }
     }
 }

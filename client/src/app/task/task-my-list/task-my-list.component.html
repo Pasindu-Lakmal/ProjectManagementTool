@@ -1,1 +1,5 @@
-<p>task-my-list works!</p>
+<div class="row">
+  <div class="col-3" *ngFor="let todo of todos">
+    <app-task-my-card [todo]="todo"></app-task-my-card>
+  </div>
+</div>

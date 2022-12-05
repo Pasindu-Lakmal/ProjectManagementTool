@@ -27,4 +27,10 @@ export class TodoService {
   getWorkName(workId: number) {
     return this.http.get(this.baseUrl + 'todo/workName/' + workId);
   }
+
+  getTodoByAssignee(assigneeName: string) {
+    return this.http.get<Todo[]>(
+      this.baseUrl + 'todo/assigneename/' + assigneeName
+    );
+  }
 }
