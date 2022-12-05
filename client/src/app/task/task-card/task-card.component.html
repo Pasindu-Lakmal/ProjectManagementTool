@@ -4,21 +4,29 @@
     <h6 class="card-subtitle mb-2 text-muted">status</h6>
     <p class="card-text">Description</p>
 
-    <div class="">
+    <div class="mb-2">
       <a href="#" class="card-link">Assignee</a>
       <a href="#" class="card-link">Due Date</a>
-      <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-danger btn-s mx-1">
-          <span class="fa fa-trash"></span>
-        </button>
-        <button
-          type="button"
-          class="btn btn-success btn-s"
-          routerLink="/task/edit"
-        >
-          <span class="fa fa-edit"></span>
-        </button>
+    </div>
+
+    <div class="d-flex">
+      <div class="d-flex me-2">
+        <label class="me-1">Status:</label>
+        <select class="form-select" style="width: 130px" name="gender">
+          <option class="form-options">Pending</option>
+          <option class="form-options">Complete</option>
+        </select>
       </div>
+      <button type="button" class="btn btn-danger btn-s mx-1">
+        <span class="fa fa-trash"></span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-success btn-s"
+        routerLink="/task/edit"
+      >
+        <span class="fa fa-edit"></span>
+      </button>
     </div>
   </div>
 </div>

@@ -9,15 +9,15 @@
     [formControl]="$any(addWork.controls['workName'])"
     [label]="'title'"
   ></app-text-input>
-  <app-text-input
+  <!-- <app-text-input
     [formControl]="$any(addWork.controls['workDescription'])"
     [label]="'discription'"
-  ></app-text-input>
-  <!-- <app-textarea-input
-    [formControl]="$any(addWork.controls['discription'])"
-    [label]="'Discription'"
+  ></app-text-input> -->
+  <app-textarea-input
+    [formControl]="$any(addWork.controls['workDescription'])"
+    [label]="'discription'"
   >
-  </app-textarea-input> -->
+  </app-textarea-input>
   <div class="text-center">
     <button
       [disabled]="!addWork.valid"
@@ -34,6 +34,6 @@
 
 <!-- json output to chech form status -->
 
-<p>Form value: {{ addWork.value | json }}</p>
+<!-- <p>Form value: {{ addWork.value | json }}</p>
 <p>Form value: {{ addWork.status | json }}</p>
-<p>Form validity: {{ addWork.valid | json }}</p>
+<p>Form validity: {{ addWork.valid | json }}</p> -->
