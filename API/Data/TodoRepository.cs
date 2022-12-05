@@ -32,6 +32,11 @@ namespace API.Data
            return await _context.Todos.FindAsync(id);
         }
 
+        public async Task<IEnumerable<Todo>> GetTodoByWorkIdAsync(int workId)
+        {
+            return await _context.Todos.Where(r => r.WorkId == workId).ToListAsync();
+        }
+
         public async Task<IEnumerable<Todo>> GetTodosAsync()
         {
             return await _context.Todos.ToListAsync();

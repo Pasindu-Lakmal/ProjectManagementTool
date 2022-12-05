@@ -6,7 +6,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/_models/member';
 import { UserParams } from 'src/app/_models/userParams';
@@ -26,13 +26,14 @@ export class TaskCreateComponent implements OnInit {
   user: string[] | undefined;
   userParams: UserParams | undefined;
   members: Member[] = [];
-
+  workId: number;
   constructor(
     private accountService: AccountService,
     private memberService: MembersService,
     private toastr: ToastrService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +41,8 @@ export class TaskCreateComponent implements OnInit {
     console.log(this.members);
     this.initializeForm();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    this.workId = Number(this.route.snapshot.paramMap.get('workId'));
+    console.log(this.workId);
   }
 
   initializeForm() {

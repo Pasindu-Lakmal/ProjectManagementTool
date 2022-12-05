@@ -3,7 +3,9 @@
     <h5 class="card-title">{{ works.workName }}</h5>
     <p class="card-text">{{ works.workDescription }}</p>
 
-    <button routerLink="/task/list" class="btn btn-info">Go To Project</button>
+    <button routerLink="/task/list/{{ works.workId }}" class="btn btn-info">
+      Go To Project
+    </button>
     <button
       type="button"
       class="btn btn-danger btn-s mx-2"

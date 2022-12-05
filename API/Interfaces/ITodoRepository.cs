@@ -13,6 +13,7 @@ namespace API.Interfaces
         Task<bool> SaveAllAsync();
 
         Task<Todo> GetTodoByIdAsync(int id);
+        Task<IEnumerable<Todo>> GetTodoByWorkIdAsync(int workId);
     }
 }
 

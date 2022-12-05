@@ -41,14 +41,14 @@ namespace API.Controllers
             return BadRequest("Failed to add work");
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<WorkDetailsDto>>> GetUsersName()
-        {
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<WorkDetailsDto>>> GetWorks()
+        // {
           
-            var works = await _workRepository.GetWorks();
-            var usersToReturn = _mapper.Map<IEnumerable<WorkDetailsDto>>(works);
-            return  Ok(usersToReturn);
-        }
+        //     var works = await _workRepository.GetWorks();
+        //     var usersToReturn = _mapper.Map<IEnumerable<WorkDetailsDto>>(works);
+        //     return  Ok(usersToReturn);
+        // }
 
         [HttpDelete("delete/{workId}")]
 
@@ -65,7 +65,14 @@ namespace API.Controllers
 
         }
 
-
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<WorkDetailsDto>>> GetWorksbyId()
+        {
+          
+            var works = await _workRepository.GetWorkByIdAsync(16);
+            // var usersToReturn = _mapper.Map<IEnumerable<WorkDetailsDto>>(works);
+            return  Ok(works);
+        }
 
 
     }

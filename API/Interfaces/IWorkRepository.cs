@@ -14,5 +14,6 @@ namespace API.Interfaces
         Task<bool> SaveAllAsync();
 
         Task<Work> GetWorkByIdAsync(int id);
+        
     }
 }
