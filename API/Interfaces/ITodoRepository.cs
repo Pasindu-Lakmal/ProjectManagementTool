@@ -14,6 +14,7 @@ namespace API.Interfaces
 
         Task<Todo> GetTodoByIdAsync(int id);
         Task<IEnumerable<Todo>> GetTodoByWorkIdAsync(int workId);
+        Task<IEnumerable<Todo>> GetTodoByAssigneeIdAsync(int workId);
     }
 }
 

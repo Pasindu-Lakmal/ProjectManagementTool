@@ -19,7 +19,8 @@ namespace API.Helpers
             CreateMap<NameDto, AppUser>();
             CreateMap<Work, WorkDetailsDto>();  
             CreateMap<Work, WorkDto>(); 
-            CreateMap<Todo, TodoDto>();
+            CreateMap<Todo, TodoDto>()
+             .ForMember(dest => dest.WorkName, opt => opt.MapFrom(src =>src.Works.WorkName));
         }
     }
 }

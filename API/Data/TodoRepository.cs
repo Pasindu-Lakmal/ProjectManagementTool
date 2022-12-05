@@ -1,5 +1,6 @@
 using API.Entities;
 using API.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -34,8 +35,9 @@ namespace API.Data
 
         public async Task<IEnumerable<Todo>> GetTodoByWorkIdAsync(int workId)
         {
-            return await _context.Todos.Where(r => r.WorkId == workId).ToListAsync();
+            return await _context.Todos.Where(r => r.WorkId == workId).Include(e =>e.Works).ToListAsync();
         }
+
 
         public async Task<IEnumerable<Todo>> GetTodosAsync()
         {
@@ -45,6 +47,11 @@ namespace API.Data
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+         public async Task<IEnumerable<Todo>> GetTodoByAssigneeIdAsync(int assigneeId)
+        {
+            return await _context.Todos.Where(r => r.AppUserId == assigneeId).Include(e =>e.Works).ToListAsync();
         }
     }
 }
