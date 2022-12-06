@@ -134,6 +134,13 @@ namespace API.Controllers
         }
        
 
-
+         [HttpGet("todobyId/{todoId}")]
+        public async Task<ActionResult<TodoDto>> GetTodo(int todoId)
+        {
+          
+            var todo = await _todoRepository.GetTodoByIdAsync(todoId);
+            var todoToReturn = _mapper.Map<TodoDto>(todo);
+            return  Ok(todoToReturn);
+        }
     }
 }
