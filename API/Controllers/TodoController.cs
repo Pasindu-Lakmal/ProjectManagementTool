@@ -119,7 +119,19 @@ namespace API.Controllers
 
 
         
+        [HttpPut]
+        public async Task<ActionResult>UpdateUser(TodoUpdateDto todoUpdateDto)
+        {
+            var todo = await _todoRepository.GetTodoByIdAsync(todoUpdateDto.TodoId);
 
+            _mapper.Map(todoUpdateDto, todo);
+
+            _todoRepository.Update(todo);
+
+            if( await _todoRepository.SaveAllAsync())return NoContent();
+        
+            return BadRequest("Faild to update user");
+        }
        
 
 

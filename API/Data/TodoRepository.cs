@@ -61,5 +61,10 @@ namespace API.Data
             return await _context.Todos.Where(r => r.AssigneeName == assigneeName).Include(e =>e.Works).ToListAsync();
 
         }
+
+        public void Update(Todo todo)
+        {
+             _context.Entry(todo).State = EntityState.Modified;
+        }
     }
 }

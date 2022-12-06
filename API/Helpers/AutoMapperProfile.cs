@@ -22,6 +22,7 @@ namespace API.Helpers
             CreateMap<Todo, TodoDto>()
              .ForMember(dest => dest.WorkName, opt => opt.MapFrom(src =>src.Works.WorkName));
             CreateMap<WorkUpdateDto, Work>();
+            CreateMap<TodoUpdateDto, Todo>();
         }
     }
 }
