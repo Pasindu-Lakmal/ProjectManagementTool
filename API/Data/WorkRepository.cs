@@ -37,7 +37,10 @@ namespace API.Data
         {
             return await _context.Works.FindAsync(id);
         }
-  
 
+        public void Update(Work work)
+        {
+             _context.Entry(work).State = EntityState.Modified;
+        }
     }
 }

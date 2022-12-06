@@ -65,6 +65,21 @@ namespace API.Controllers
 
         }
 
+        [HttpPut]
+        public async Task<ActionResult>UpdateUser(WorkUpdateDto workUpdateDto)
+        {
+            var work = await _workRepository.GetWorkByIdAsync(workUpdateDto.WorkId);
+
+            _mapper.Map(workUpdateDto, work);
+
+            _workRepository.Update(work);
+
+            if( await _workRepository.SaveAllAsync())return NoContent();
+        
+            return BadRequest("Faild to update user");
+        }
+
+
 
     }
 }

@@ -15,5 +15,6 @@ namespace API.Interfaces
 
         Task<Work> GetWorkByIdAsync(int id);
         
+        void Update(Work work);
     }
 }
