@@ -1,27 +1,35 @@
-<form #editForm="ngForm" (ngSubmit)="updateWork()" id="editForm" *ngIf="work">
-  <h4>Project Name :</h4>
-  <textarea
-    class="form-control"
-    [(ngModel)]="work.workName"
-    name="workName"
-    id=""
-    rows="1"
-  ></textarea>
-  <h4 class="mt-2">Project Description :</h4>
-  <textarea
-    class="form-control"
-    [(ngModel)]="work.workDescription"
-    name="workDescription"
-    id=""
-    rows="6"
-  ></textarea>
-  <div class="card-footer mt-3 w-25">
-    <button
-      form="editForm"
-      [disabled]="!editForm.dirty"
-      class="btn btn-success col-12"
-    >
-      Save Changes
-    </button>
+<div *ngIf="work">
+  <div class="col-8">
+    <div class="alert alert-info" *ngIf="editForm.dirty">
+      <strong>Infomation:</strong>You have made changed any unsaved changes will
+      be lost
+    </div>
   </div>
-</form>
+  <form #editForm="ngForm" (ngSubmit)="updateWork()" id="editForm">
+    <h4>Project Name :</h4>
+    <textarea
+      class="form-control"
+      [(ngModel)]="work.workName"
+      name="workName"
+      id=""
+      rows="1"
+    ></textarea>
+    <h4 class="mt-2">Project Description :</h4>
+    <textarea
+      class="form-control"
+      [(ngModel)]="work.workDescription"
+      name="workDescription"
+      id=""
+      rows="6"
+    ></textarea>
+    <div class="card-footer mt-3 w-25">
+      <button
+        form="editForm"
+        [disabled]="!editForm.dirty"
+        class="btn btn-success col-12"
+      >
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>

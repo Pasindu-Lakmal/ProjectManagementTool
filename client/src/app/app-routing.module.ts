@@ -41,7 +41,7 @@ const routes: Routes = [
       { path: 'project/add', component: WorkAddComponent },
 
       { path: 'task/list/:workId', component: TaskListComponent },
-      { path: 'task/edit', component: TaskEditComponent },
+      { path: 'task/edit/:taskId', component: TaskEditComponent },
       { path: 'task/create/:workId', component: TaskCreateComponent },
       { path: 'mytask', component: TaskMyListComponent },
     ],

@@ -32,14 +32,12 @@ export class WorkEditComponent implements OnInit {
   ngOnInit(): void {
     this.workId = Number(this.route.snapshot.paramMap.get('workId'));
     this.loadWork();
-    console.log(this.workId);
   }
 
   loadWork() {
     this.workService.getWork(this.workId).subscribe({
       next: (res) => {
         this.work = res;
-        console.log(this.work);
       },
     });
   }
@@ -47,7 +45,7 @@ export class WorkEditComponent implements OnInit {
   updateWork() {
     this.workService.updateWork(this.work).subscribe({
       next: () => {
-        this.toastr.success('Profile updated succeddfully');
+        this.toastr.success('Project updated succeddfully');
         this.router.navigateByUrl('/project');
       },
     });
