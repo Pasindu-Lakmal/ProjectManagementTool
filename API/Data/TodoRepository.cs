@@ -66,5 +66,10 @@ namespace API.Data
         {
              _context.Entry(todo).State = EntityState.Modified;
         }
+
+        public async Task<IEnumerable<Todo>> GetTodoByCreaterName(string createrName)
+        {
+             return await _context.Todos.Where(r => r.CreaterName == createrName).Include(e =>e.Works).ToListAsync();
+        }
     }
 }

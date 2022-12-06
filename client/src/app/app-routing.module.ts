@@ -10,6 +10,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { TaskCreateComponent } from './task/task-create/task-create.component';
+import { TaskCreaterListComponent } from './task/task-creater-list/task-creater-list.component';
 import { TaskEditComponent } from './task/task-edit/task-edit.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { TaskMyListComponent } from './task/task-my-list/task-my-list.component';
@@ -44,6 +45,7 @@ const routes: Routes = [
       { path: 'task/edit/:taskId', component: TaskEditComponent },
       { path: 'task/create/:workId', component: TaskCreateComponent },
       { path: 'mytask', component: TaskMyListComponent },
+      { path: 'Created', component: TaskCreaterListComponent },
     ],
   },
 

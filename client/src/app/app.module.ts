@@ -38,6 +38,8 @@ import { WorkAddComponent } from './work/work-add/work-add.component';
 import { TextareaInputComponent } from './_forms/textarea-input/textarea-input.component';
 import { TaskMyListComponent } from './task/task-my-list/task-my-list.component';
 import { TaskMyCardComponent } from './task/task-my-card/task-my-card.component';
+import { TaskCreaterCardComponent } from './task/task-creater-card/task-creater-card.component';
+import { TaskCreaterListComponent } from './task/task-creater-list/task-creater-list.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { TaskMyCardComponent } from './task/task-my-card/task-my-card.component'
     TextareaInputComponent,
     TaskMyListComponent,
     TaskMyCardComponent,
+    TaskCreaterCardComponent,
+    TaskCreaterListComponent,
   ],
   imports: [
     BrowserModule,

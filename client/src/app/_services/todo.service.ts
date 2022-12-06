@@ -40,4 +40,9 @@ export class TodoService {
   updateWork(todo: Todo) {
     return this.http.put(this.baseUrl + 'todo', todo);
   }
+  getTodoByCreater(createrName: string) {
+    return this.http.get<Todo[]>(
+      this.baseUrl + 'todo/CreaterName/' + createrName
+    );
+  }
 }

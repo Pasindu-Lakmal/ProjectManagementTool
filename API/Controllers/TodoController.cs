@@ -142,5 +142,16 @@ namespace API.Controllers
             var todoToReturn = _mapper.Map<TodoDto>(todo);
             return  Ok(todoToReturn);
         }
+
+        [HttpGet("CreaterName/{createrName}")]
+         public async Task<ActionResult<IEnumerable<TodoDto>>> GetTodosByCreaterName(string createrName)
+        {
+            var todos = await _todoRepository.GetTodoByCreaterName(createrName);
+            
+            var todosToReturn = _mapper.Map<IEnumerable<TodoDto>>(todos);
+            // return Ok(todos);
+            return  Ok(todosToReturn);
+        }
+
     }
 }
