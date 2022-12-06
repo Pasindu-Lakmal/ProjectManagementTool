@@ -44,7 +44,8 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<WorkDetailsDto>>> GetWorks()
         {
-          
+            var sourceUser = User.GetUsername();
+            if(sourceUser == null) return BadRequest("user Not Found");
             var works = await _workRepository.GetWorks();
             var usersToReturn = _mapper.Map<IEnumerable<WorkDetailsDto>>(works);
             return  Ok(usersToReturn);

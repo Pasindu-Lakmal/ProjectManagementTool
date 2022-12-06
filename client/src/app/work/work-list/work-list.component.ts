@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Work } from 'src/app/_models/work';
+import { AccountService } from 'src/app/_services/account.service';
 import { WorkService } from 'src/app/_services/work.service';
 
 @Component({
@@ -9,7 +10,10 @@ import { WorkService } from 'src/app/_services/work.service';
 })
 export class WorkListComponent implements OnInit {
   works: Work[] = [];
-  constructor(private workService: WorkService) {}
+  constructor(
+    private workService: WorkService,
+    public accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
     this.loadWork();

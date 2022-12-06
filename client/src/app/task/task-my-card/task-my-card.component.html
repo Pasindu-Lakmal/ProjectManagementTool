@@ -54,7 +54,7 @@
           *ngIf="currentUserName == todo.createrName"
           type="button"
           class="btn btn-success btn-s"
-          routerLink="/task/edit"
+          routerLink="/task/edit/{{ todo.todoId }}"
         >
           <span class="fa fa-edit"></span>
         </button>

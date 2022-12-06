@@ -1,4 +1,4 @@
-<div class="d-flex mb-3">
+<div class="d-flex mb-3" *ngIf="(accountService.currentUser$ | async) != null">
   <button routerLink="/project/add" class="btn btn-success btn-lg float-right">
     <span class="fa fa-solid fa-plus me-2"></span>Add Project
   </button>
