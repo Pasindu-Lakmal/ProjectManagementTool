@@ -21,4 +21,11 @@ export class WorkService {
   deleteWork(workId: number) {
     return this.http.delete(this.baseUrl + 'work/delete/' + workId, {});
   }
+
+  getWork(workId: number) {
+    return this.http.get<Work>(this.baseUrl + 'work/' + workId);
+  }
+  updateWork(work: Work) {
+    return this.http.put(this.baseUrl + 'work', work);
+  }
 }

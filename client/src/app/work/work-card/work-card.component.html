@@ -19,7 +19,7 @@
       *ngIf="currentUserName == works.createrName"
       type="button"
       class="btn btn-success btn-s"
-      routerLink="/project/edit"
+      routerLink="/project/edit/{{ works.workId }}"
     >
       <span class="fa fa-edit"></span>
     </button>

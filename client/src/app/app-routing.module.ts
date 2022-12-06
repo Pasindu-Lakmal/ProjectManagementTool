@@ -37,7 +37,7 @@ const routes: Routes = [
       { path: 'messages', component: MessagesComponent },
 
       { path: 'project', component: WorkListComponent },
-      { path: 'project/edit', component: WorkEditComponent },
+      { path: 'project/edit/:workId', component: WorkEditComponent },
       { path: 'project/add', component: WorkAddComponent },
 
       { path: 'task/list/:workId', component: TaskListComponent },

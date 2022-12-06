@@ -65,6 +65,15 @@ namespace API.Controllers
 
         }
 
+        [HttpGet("{workId}")]
+        public async Task<ActionResult<WorkDetailsDto>> GetWork(int workId)
+        {
+          
+            var work = await _workRepository.GetWorkByIdAsync(workId);
+            var workToReturn = _mapper.Map<WorkDetailsDto>(work);
+            return  Ok(workToReturn);
+        }
+
         [HttpPut]
         public async Task<ActionResult>UpdateUser(WorkUpdateDto workUpdateDto)
         {
