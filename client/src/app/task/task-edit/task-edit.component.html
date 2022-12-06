@@ -1,1 +1,49 @@
-<p>task-edit works!</p>
+<div *ngIf="todo">
+  <div class="col-8">
+    <div class="alert alert-info" *ngIf="editForm.dirty">
+      <strong>Infomation:</strong>You have made changed any unsaved changes will
+      be lost
+    </div>
+  </div>
+  <form #editForm="ngForm" (ngSubmit)="updateWork()" id="editForm">
+    <h4>Project Name :</h4>
+    <textarea
+      class="form-control"
+      [(ngModel)]="todo.title"
+      name="title"
+      id=""
+      rows="1"
+    ></textarea>
+    <h4 class="mt-2">Project Description :</h4>
+    <textarea
+      class="form-control"
+      [(ngModel)]="todo.description"
+      name="description"
+      id=""
+      rows="6"
+    ></textarea>
+
+    <div class="d-flex mt-2">
+      <label class="me-1">Status:</label>
+      <select
+        class="form-select"
+        style="width: 130px"
+        [(ngModel)]="todo.status"
+        name="status"
+      >
+        <option class="form-options">Pending</option>
+        <option class="form-options">Complete</option>
+      </select>
+    </div>
+
+    <div class="card-footer mt-3 w-25">
+      <button
+        form="editForm"
+        [disabled]="!editForm.dirty"
+        class="btn btn-success col-12"
+      >
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>

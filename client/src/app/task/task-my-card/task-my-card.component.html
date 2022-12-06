@@ -1,4 +1,4 @@
-<div class="card mb-4" style="width: 20rem">
+<div class="card mb-4" style="width: 20rem; height: 16rem; overflow-y: scroll">
   <div class="card-body">
     <h5 class="card-title">{{ todo.title }}</h5>
     <h6 class="card-subtitle mb-2 text-muted">Status: {{ todo.status }}</h6>
@@ -33,13 +33,13 @@
     </div>
 
     <div class="d-flex">
-      <div class="d-flex me-2">
+      <!-- <div class="d-flex me-2">
         <label class="me-1">Status:</label>
         <select class="form-select" style="width: 130px" name="gender">
           <option class="form-options">Pending</option>
           <option class="form-options">Complete</option>
         </select>
-      </div>
+      </div> -->
       <div>
         <button
           *ngIf="currentUserName == todo.createrName"
@@ -51,7 +51,6 @@
           <span class="fa fa-trash"></span>
         </button>
         <button
-          *ngIf="currentUserName == todo.createrName"
           type="button"
           class="btn btn-success btn-s"
           routerLink="/task/edit/{{ todo.todoId }}"

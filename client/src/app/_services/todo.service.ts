@@ -33,4 +33,11 @@ export class TodoService {
       this.baseUrl + 'todo/assigneename/' + assigneeName
     );
   }
+
+  getTodoById(todoId: number) {
+    return this.http.get<Todo>(this.baseUrl + 'todo/todobyId/' + todoId);
+  }
+  updateWork(todo: Todo) {
+    return this.http.put(this.baseUrl + 'todo', todo);
+  }
 }
