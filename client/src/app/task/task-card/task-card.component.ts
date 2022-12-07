@@ -18,7 +18,6 @@ export class TaskCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentUser();
-    console.log(this.todo);
   }
 
   deleteTodo(todoId: number) {
