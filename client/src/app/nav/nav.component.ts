@@ -32,14 +32,4 @@ export class NavComponent implements OnInit {
     this.accountService.logout();
     this.router.navigateByUrl('/');
   }
-
-  //we no need this becase we get current user dirrectly from account service
-  // getCurrentUser() {
-  //   this.accountService.currentUser$.subscribe({
-  //     next: (user) => {
-  //       this.loggedIn = !!user;
-  //     },
-  //     error: (error) => console.log(error),
-  //   });
-  // }
 }

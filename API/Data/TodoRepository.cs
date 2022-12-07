@@ -35,7 +35,7 @@ namespace API.Data
 
         public async Task<IEnumerable<Todo>> GetTodoByWorkIdAsync(int workId)
         {
-            return await _context.Todos.Where(r => r.WorkId == workId).Include(e =>e.Works).ToListAsync();
+            return await _context.Todos.Where(r => r.WorkId == workId).ToListAsync();
         }
 
 

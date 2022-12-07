@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Todo } from 'src/app/_models/todo';
 import { AccountService } from 'src/app/_services/account.service';
 import { TodoService } from 'src/app/_services/todo.service';
@@ -15,7 +14,6 @@ export class TaskCreaterListComponent implements OnInit {
   workName: string;
   todos: Todo[] = [];
   constructor(
-    private route: ActivatedRoute,
     private todoService: TodoService,
     private accountService: AccountService
   ) {}
@@ -29,7 +27,6 @@ export class TaskCreaterListComponent implements OnInit {
     this.todoService.getTodoByCreater(this.currentUserName).subscribe({
       next: (response) => {
         this.todos = response;
-        console.log(this.todos);
       },
     });
   }

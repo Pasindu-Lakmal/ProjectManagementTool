@@ -24,7 +24,7 @@
           >{{ todo.createrName }}</a
         >
       </div>
-      <div>
+      <div *ngIf="todo.workName">
         Project :
         <a routerLink="/task/list/{{ todo.workId }}" class="card-link me-1">{{
           todo.workName
@@ -33,13 +33,6 @@
     </div>
 
     <div class="d-flex">
-      <!-- <div class="d-flex me-2">
-        <label class="me-1">Status:</label>
-        <select class="form-select" style="width: 130px" name="gender">
-          <option class="form-options">Pending</option>
-          <option class="form-options">Complete</option>
-        </select>
-      </div> -->
       <div>
         <button
           *ngIf="currentUserName == todo.createrName"
