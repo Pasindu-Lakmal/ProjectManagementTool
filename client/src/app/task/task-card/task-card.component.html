@@ -24,6 +24,12 @@
           >{{ todo.createrName }}</a
         >
       </div>
+      <div>
+        Project :
+        <a routerLink="/task/list/{{ todo.workId }}" class="card-link me-1">{{
+          todo.workName
+        }}</a>
+      </div>
     </div>
 
     <div class="d-flex">
