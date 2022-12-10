@@ -24,7 +24,7 @@ export class TaskCardComponent implements OnInit {
     console.log('delete click');
     this.todoService.deleteTodo(todoId).subscribe({
       next: (responce) => {
-        location.reload();
+        this.todo.todoId = null;
       },
       error: (error) => {
         console.log(error);

@@ -1,17 +1,18 @@
-<div class="card text-center">
+<div class="card text-center" *ngIf="works.workId">
   <div class="card-body">
     <h5 class="card-title">{{ works.workName }}</h5>
     <p class="card-text">{{ works.workDescription }}</p>
-
     <button routerLink="/task/list/{{ works.workId }}" class="btn btn-info">
       Go To Project
     </button>
+
+    <!-- creted swal is below -->
     <button
+      [swal]="deleteSwal"
       *ngIf="currentUserName == works.createrName"
       type="button"
       class="btn btn-danger btn-s mx-2"
       routerLink="/project"
-      (click)="deleteWork(works.workId)"
     >
       <span class="fa fa-trash"></span>
     </button>
@@ -23,6 +24,18 @@
     >
       <span class="fa fa-edit"></span>
     </button>
+
+    <!-- create swal  -->
+    <swal
+      #deleteSwal
+      title="Delete {{ works.workName }} ?"
+      text="This cannot be undone"
+      icon="question"
+      [showCancelButton]="true"
+      [focusCancel]="true"
+      (confirm)="deleteWork(works.workId)"
+    >
+    </swal>
   </div>
   <div class="card-footer text-muted">
     Created By:

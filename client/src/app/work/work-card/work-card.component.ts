@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Work } from 'src/app/_models/work';
 import { AccountService } from 'src/app/_services/account.service';
@@ -11,6 +11,7 @@ import { WorkService } from 'src/app/_services/work.service';
 })
 export class WorkCardComponent implements OnInit {
   @Input() works: Work | undefined;
+
   currentUserName: string;
 
   constructor(
@@ -28,11 +29,9 @@ export class WorkCardComponent implements OnInit {
     console.log('delete click');
     this.workService.deleteWork(workId).subscribe({
       next: (responce) => {
-        location.reload();
+        this.works.workId = null;
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 

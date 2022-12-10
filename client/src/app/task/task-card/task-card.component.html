@@ -1,55 +1,72 @@
-<div class="card mb-4" style="width: 20rem; height: 16rem; overflow-y: scroll">
-  <div class="card-body">
-    <h5 class="card-title">{{ todo.title }}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Status: {{ todo.status }}</h6>
-    <p class="card-text">{{ todo.description }}</p>
+<div *ngIf="todo.todoId">
+  <div
+    class="card mb-4"
+    style="width: 20rem; height: 16rem; overflow-y: scroll"
+  >
+    <div class="card-body">
+      <h5 class="card-title">{{ todo.title }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Status: {{ todo.status }}</h6>
+      <p class="card-text">{{ todo.description }}</p>
 
-    <div class="mb-2">
-      <div class="me-2">
-        Due Date : {{ todo.dueDate | date : "dd MMM yyyy" }}
+      <div class="mb-2">
+        <div class="me-2">
+          Due Date : {{ todo.dueDate | date : "dd MMM yyyy" }}
+        </div>
+        <div>
+          Assinee:
+          <a
+            routerLink="/members/{{ todo.assigneeName }}"
+            class="card-link me-1"
+            >{{ todo.assigneeName }}</a
+          >
+        </div>
+        <div>
+          Created By:
+          <a
+            routerLink="/members/{{ todo.createrName }}"
+            class="card-link me-1"
+            >{{ todo.createrName }}</a
+          >
+        </div>
+        <div *ngIf="todo.workName">
+          Project :
+          <a routerLink="/task/list/{{ todo.workId }}" class="card-link me-1">{{
+            todo.workName
+          }}</a>
+        </div>
       </div>
-      <div>
-        Assinee:
-        <a
-          routerLink="/members/{{ todo.assigneeName }}"
-          class="card-link me-1"
-          >{{ todo.assigneeName }}</a
-        >
-      </div>
-      <div>
-        Created By:
-        <a
-          routerLink="/members/{{ todo.createrName }}"
-          class="card-link me-1"
-          >{{ todo.createrName }}</a
-        >
-      </div>
-      <div *ngIf="todo.workName">
-        Project :
-        <a routerLink="/task/list/{{ todo.workId }}" class="card-link me-1">{{
-          todo.workName
-        }}</a>
-      </div>
-    </div>
 
-    <div class="d-flex">
-      <div>
-        <button
-          *ngIf="currentUserName == todo.createrName"
-          type="button"
-          class="btn btn-danger btn-s mx-1"
-          routerLink="/task/list/{{ todo.workId }}"
-          (click)="deleteTodo(todo.todoId)"
+      <div class="d-flex">
+        <div>
+          <!-- creted swal is below -->
+          <button
+            [swal]="deleteSwal"
+            *ngIf="currentUserName == todo.createrName"
+            type="button"
+            class="btn btn-danger btn-s mx-1"
+          >
+            <span class="fa fa-trash"></span>
+          </button>
+          <button
+            type="button"
+            class="btn btn-success btn-s"
+            routerLink="/task/edit/{{ todo.todoId }}"
+          >
+            <span class="fa fa-edit"></span>
+          </button>
+        </div>
+
+        <!-- create swal  -->
+        <swal
+          #deleteSwal
+          title="Delete {{ todo.title }} ?"
+          text="This cannot be undone"
+          icon="question"
+          [showCancelButton]="true"
+          [focusCancel]="true"
+          (confirm)="deleteTodo(todo.todoId)"
         >
-          <span class="fa fa-trash"></span>
-        </button>
-        <button
-          type="button"
-          class="btn btn-success btn-s"
-          routerLink="/task/edit/{{ todo.todoId }}"
-        >
-          <span class="fa fa-edit"></span>
-        </button>
+        </swal>
       </div>
     </div>
   </div>

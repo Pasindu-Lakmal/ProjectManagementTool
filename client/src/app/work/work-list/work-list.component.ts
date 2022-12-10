@@ -9,6 +9,7 @@ import { WorkService } from 'src/app/_services/work.service';
   styleUrls: ['./work-list.component.css'],
 })
 export class WorkListComponent implements OnInit {
+  taskMode = false;
   works: Work[] = [];
   constructor(
     private workService: WorkService,
@@ -26,5 +27,9 @@ export class WorkListComponent implements OnInit {
         console.log(this.works);
       },
     });
+  }
+
+  changeToTaskMode() {
+    this.taskMode = true;
   }
 }

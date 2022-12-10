@@ -9,6 +9,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [],
@@ -25,6 +26,7 @@ import { TimeagoModule } from 'ngx-timeago';
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
     TimeagoModule.forRoot(),
+    SweetAlert2Module.forRoot(),
   ],
 
   exports: [
@@ -37,6 +39,7 @@ import { TimeagoModule } from 'ngx-timeago';
     PaginationModule,
     ButtonsModule,
     TimeagoModule,
+    SweetAlert2Module,
   ],
 })
 export class SharedModule {}
