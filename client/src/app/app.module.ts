@@ -38,6 +38,7 @@ import { WorkAddComponent } from './work/work-add/work-add.component';
 import { TextareaInputComponent } from './_forms/textarea-input/textarea-input.component';
 import { TaskMyListComponent } from './task/task-my-list/task-my-list.component';
 import { TaskCreaterListComponent } from './task/task-creater-list/task-creater-list.component';
+import { PieChartComponent } from './_charts/pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { TaskCreaterListComponent } from './task/task-creater-list/task-creater-
     TextareaInputComponent,
     TaskMyListComponent,
     TaskCreaterListComponent,
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,

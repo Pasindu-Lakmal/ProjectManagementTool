@@ -1,13 +1,10 @@
 <div class="container mt-5">
-  <div *ngIf="!registerMode" style="text-align: center">
-    <!-- <h1>Chart details</h1>
-    <p class="lead">pie chart</p> -->
+  <div
+    *ngIf="!registerMode && (accountService.currentUser$ | async) === null"
+    style="text-align: center"
+  >
     <div class="text-center">
-      <button
-        *ngIf="(accountService.currentUser$ | async) === null"
-        (click)="registerToggle()"
-        class="btn btn-primary btn-lg me-2"
-      >
+      <button (click)="registerToggle()" class="btn btn-primary btn-lg me-2">
         Register
       </button>
       <button class="btn btn-info btn-lg">Learn more</button>
@@ -26,4 +23,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="accountService.currentUser$ | async">
+  <app-pie-chart></app-pie-chart>
 </div>

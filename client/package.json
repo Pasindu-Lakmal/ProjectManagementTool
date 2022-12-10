@@ -24,6 +24,7 @@
     "@sweetalert2/ngx-sweetalert2": "^12.0.2",
     "bootstrap": "^5.2.3",
     "bootswatch": "^5.2.2",
+    "chart.js": "^4.0.1",
     "font-awesome": "^4.7.0",
     "ng2-file-upload": "^2.0.0-3",
     "ngx-bootstrap": "^9.0.0",
