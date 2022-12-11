@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { Chart, registerables } from 'node_modules/chart.js';
 Chart.register(...registerables);
 @Component({
@@ -7,34 +8,35 @@ Chart.register(...registerables);
   styleUrls: ['./pie-chart.component.css'],
 })
 export class PieChartComponent implements OnInit {
+  @Input() todo: number;
+  @Input() pending: number;
+  @Input() complete: number;
   constructor() {}
 
   ngOnInit(): void {
     this.RenderChart();
+    console.log(this.todo, this.pending, this.complete);
   }
 
   RenderChart() {
-    new Chart('piechart', {
-      type: 'bar',
+    new Chart('doughnutChart', {
+      type: 'doughnut',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['Todo', 'Complete', 'Pending'],
         datasets: [
           {
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1,
+            label: 'My First Dataset',
+            data: [300, 50, 100],
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 205, 86)',
+            ],
+            hoverOffset: 10,
           },
         ],
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
+      options: {},
     });
   }
-
-  Pie() {}
 }

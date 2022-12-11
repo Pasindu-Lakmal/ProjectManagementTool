@@ -25,6 +25,13 @@
   </div>
 </div>
 
-<div *ngIf="accountService.currentUser$ | async">
-  <app-pie-chart></app-pie-chart>
+<div class="justify-content-center" *ngIf="accountService.currentUser$ | async">
+  <h1>{{ pending }}</h1>
+  <h2>{{ todo }}</h2>
+  <h2>{{ complete }}</h2>
+  <app-pie-chart
+    [todo]="todo"
+    [pending]="pending"
+    [complete]="complete"
+  ></app-pie-chart>
 </div>

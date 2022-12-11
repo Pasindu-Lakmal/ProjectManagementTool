@@ -15,7 +15,6 @@ export class TaskMyListComponent implements OnInit {
   workName: string;
   todos: Todo[] = [];
   constructor(
-    private route: ActivatedRoute,
     private todoService: TodoService,
     private accountService: AccountService
   ) {}
