@@ -3,6 +3,16 @@
     *ngIf="!registerMode && (accountService.currentUser$ | async) === null"
     style="text-align: center"
   >
+    <div>
+      <h2 class="text-center text-secondary">Project Management</h2>
+      <hr />
+      <img
+        style="max-width: 35%; height: 30%"
+        class="img-flui"
+        src="{{ './assets/1.jpg' }} "
+        alt=""
+      />
+    </div>
     <div class="text-center">
       <button (click)="registerToggle()" class="btn btn-primary btn-lg me-2">
         Register
