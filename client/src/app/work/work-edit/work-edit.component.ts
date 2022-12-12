@@ -45,7 +45,7 @@ export class WorkEditComponent implements OnInit {
   updateWork() {
     this.workService.updateWork(this.work).subscribe({
       next: () => {
-        this.toastr.success('Project updated succeddfully');
+        this.toastr.success('Project updated succefully');
         this.router.navigateByUrl('/project');
       },
     });

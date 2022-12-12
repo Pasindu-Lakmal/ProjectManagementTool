@@ -4,6 +4,17 @@
   </button>
 </div>
 
-<div *ngFor="let work of works">
-  <app-work-card [works]="work"></app-work-card>
+<ng-container *ngIf="works[0]">
+  <div *ngFor="let work of works">
+    <app-work-card [works]="work"></app-work-card>
+  </div>
+</ng-container>
+
+<div *ngIf="!works[0]">
+  <div class="col-8">
+    <div class="alert alert-info">
+      <strong>Infomation:</strong>No any Projects , Create new Project Using Add
+      Project Button
+    </div>
+  </div>
 </div>

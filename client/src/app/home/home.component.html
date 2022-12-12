@@ -25,13 +25,45 @@
   </div>
 </div>
 
-<div class="justify-content-center" *ngIf="accountService.currentUser$ | async">
-  <h1>{{ pending }}</h1>
-  <h2>{{ todo }}</h2>
-  <h2>{{ complete }}</h2>
-  <app-pie-chart
-    [todo]="todo"
-    [pending]="pending"
-    [complete]="complete"
-  ></app-pie-chart>
+<div class="mb-3">
+  <div class="container mt-5">
+    <div class="">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <div
+            *ngIf="
+              (accountService.currentUser$ | async) &&
+              (pending >= 1 || complete >= 1 || todo >= 1)
+            "
+          >
+            <h2 class="text-center text-primary">Task Distribution</h2>
+            <hr />
+            <div class="ml-1">
+              <app-pie-chart
+                [todo]="todo"
+                [pending]="pending"
+                [complete]="complete"
+              ></app-pie-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="justify-content-center0"
+  *ngIf="
+    (accountService.currentUser$ | async) &&
+    pending == 0 &&
+    complete == 0 &&
+    todo == 0
+  "
+>
+  <div class="col-8">
+    <div class="alert alert-info">
+      <strong>Infomation:</strong>You don't have assined Tasks
+    </div>
+  </div>
 </div>

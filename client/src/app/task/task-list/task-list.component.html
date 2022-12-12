@@ -9,9 +9,18 @@
     <span class="fa fa-solid fa-plus me-2"></span>Add Task
   </button>
 </div>
-<div class="row">
+<div class="row" *ngIf="todos[0]">
   <div class="col-3" *ngFor="let todo of todos">
     <app-task-card [todo]="todo"></app-task-card>
+  </div>
+</div>
+
+<div *ngIf="!todos[0]">
+  <div class="col-8">
+    <div class="alert alert-info">
+      <strong>Infomation:</strong>This Project Dosen't have any Tasks Yet,
+      Create First Task Using Add Task Button
+    </div>
   </div>
 </div>
 

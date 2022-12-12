@@ -13,10 +13,9 @@ export class HomeComponent implements OnInit {
   todos: Todo[] = [];
   registerMode = false;
   users: any;
-  // complete: number;
-
-  // pending: number;
-  // count: number[];
+  pending: number = 0;
+  complete: number = 0;
+  todo: number = 0;
 
   constructor(
     public accountService: AccountService,
@@ -26,9 +25,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentUser();
     this.loadTodo();
-    // this.getCounts(this.todos).then((val) => console.log(val));
-    let count: any = this.getCounts(this.todos);
-    console.log(count);
     // this.getCount(this.todos);
   }
 
@@ -45,7 +41,7 @@ export class HomeComponent implements OnInit {
     this.todoService.getTodoByAssignee(this.currentUserName).subscribe({
       next: (response) => {
         this.todos = response;
-        // this.getCounts(this.todos);
+        this.getCount(this.todos);
       },
     });
   }
@@ -61,48 +57,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  // getCount(todos: Todo[]) {
-  //   var pending: number = 0;
-  //   var complete: number = 0;
-  //   var tod: number = 0;
-  //   todos.forEach((todo) => {
-  //     if (todo.status === 'pending') {
-  //       pending = pending + 1;
-  //     } else if (todo.status === 'complete') {
-  //       complete = complete + 1;
-  //     } else if (todo.status === 'todo') {
-  //       tod = tod + 1;
-  //     }
-  //   });
-  //   console.log(pending);
-  //   // return [pending, tod, complete];
-  // }
-
-  test(arg: string): Promise<number> {
-    return new Promise<number>((resolve, reject) => {
-      if (arg === 'a') {
-        resolve(1);
-      } else {
-        reject('1');
+  getCount(todos: Todo[]) {
+    todos.forEach((todo) => {
+      if (todo.status === 'pending') {
+        this.pending = this.pending + 1;
+      } else if (todo.status === 'complete') {
+        this.complete = this.complete + 1;
+      } else if (todo.status === 'todo') {
+        this.todo = this.todo + 1;
       }
-    });
-  }
-
-  getCounts(todos: Todo[]): Promise<number[]> {
-    let pending: number = 0;
-    let complete: number = 0;
-    let tod: number = 0;
-    return new Promise<number[]>((resolve, reject) => {
-      todos.forEach((todo) => {
-        if (todo.status === 'pending') {
-          pending = pending + 1;
-        } else if (todo.status === 'complete') {
-          complete = complete + 1;
-        } else if (todo.status === 'todo') {
-          tod = tod + 1;
-        }
-      });
-      resolve([pending, tod, complete]);
     });
   }
 }
