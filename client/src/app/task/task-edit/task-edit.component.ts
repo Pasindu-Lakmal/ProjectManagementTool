@@ -38,6 +38,7 @@ export class TaskEditComponent implements OnInit {
     this.todoService.getTodoById(this.todoId).subscribe({
       next: (res) => {
         this.todo = res;
+        console.log(this.todo);
       },
     });
   }
@@ -47,6 +48,7 @@ export class TaskEditComponent implements OnInit {
       next: () => {
         this.toastr.success('Task updated succeddfully');
         this.editForm.reset(this.todo);
+        this.router.navigateByUrl('/task/list/' + this.todo.workId);
       },
     });
   }

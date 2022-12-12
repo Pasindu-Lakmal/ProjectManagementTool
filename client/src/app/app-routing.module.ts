@@ -38,11 +38,17 @@ const routes: Routes = [
       { path: 'messages', component: MessagesComponent },
 
       { path: 'project', component: WorkListComponent },
-      { path: 'project/edit/:workId', component: WorkEditComponent },
+      {
+        path: 'project/edit/:workId',
+        component: WorkEditComponent,
+      },
       { path: 'project/add', component: WorkAddComponent },
 
       { path: 'task/list/:workId', component: TaskListComponent },
-      { path: 'task/edit/:taskId', component: TaskEditComponent },
+      {
+        path: 'task/edit/:taskId',
+        component: TaskEditComponent,
+      },
       { path: 'task/create/:workId', component: TaskCreateComponent },
       { path: 'mytask', component: TaskMyListComponent },
       { path: 'Created', component: TaskCreaterListComponent },
