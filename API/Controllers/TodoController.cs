@@ -4,11 +4,13 @@ using API.Entities;
 using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class TodoController : BaseApiController
     {
         private readonly ITodoRepository _todoRepository;

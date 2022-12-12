@@ -38,12 +38,14 @@ export class HomeComponent implements OnInit {
   }
 
   loadTodo() {
-    this.todoService.getTodoByAssignee(this.currentUserName).subscribe({
-      next: (response) => {
-        this.todos = response;
-        this.getCount(this.todos);
-      },
-    });
+    if (this.currentUserName != null) {
+      this.todoService.getTodoByAssignee(this.currentUserName).subscribe({
+        next: (response) => {
+          this.todos = response;
+          this.getCount(this.todos);
+        },
+      });
+    }
   }
 
   getCurrentUser() {
